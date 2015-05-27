@@ -3,8 +3,8 @@
 
 int main(int argc, char** argv)
 {
-	rtt_corba_remote::DummyClass dummyClass;
-	dummyClass.welcome();
+//rtt_corba_remote::DummyClass dummyClass;
+//dummyClass.welcome();
 
 	return 0;
 }

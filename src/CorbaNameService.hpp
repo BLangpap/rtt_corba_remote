@@ -38,6 +38,7 @@
 #define REMOTE_CORBANAMESERVICE_HPP
 
 #include <rtt/remote/INameService.hpp>
+#include <rtt/remote/ISetupGenerator.hpp>
 #include <string>
 
 namespace RTT
@@ -47,13 +48,16 @@ namespace RTT
       * @brief This class realizes the Corba Name Service by implementing the general name service interface.
       * 
       */
-    class CorbaNameService : public INameService
+    class CorbaNameService : public INameService, ISetupGenerator
     {
     public:
 	// Ctor / Dtor
 	CorbaNameService();
 	~CorbaNameService();
-      
+	
+	// Implementation of the Setup interface
+	virtual void SetupGenerator(); // override
+
 	// Implementation of the Name Service interface
 	virtual std::string getURI(std::string Name); // override;
 	virtual bool RegisterTaskContextServer(std::string Name, TaskContextServerCollection& tcsCollection); // override;

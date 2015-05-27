@@ -39,6 +39,7 @@
 
 #include <string>
 #include <rtt/remote/ITaskContextServer.hpp>
+#include <rtt/remote/ISetupGenerator.hpp>
 
 namespace RTT
 {namespace Communication
@@ -47,14 +48,17 @@ namespace RTT
       * @brief This class realizes the Task Context Server for Corba by implementing the task context server interface.
       * 
       */
-    class CorbaTaskContextServer : public ITaskContextServer
+    class CorbaTaskContextServer : public ITaskContextServer, ISetupGenerator
     {
     public:
 	// Ctor / Dtor
 	CorbaTaskContextServer();
 	~CorbaTaskContextServer();
       
-	// Implementation of the Name Service interface
+	// Implementation of the Setup interface
+	virtual void SetupGenerator(); // override
+    
+	// Implementation of the task context server interface
 	bool AttachTo(TaskContext* pTaskContext); // override;
 	bool Start(bool StartThreaded = false); // override;
 	bool Stop(); // override;

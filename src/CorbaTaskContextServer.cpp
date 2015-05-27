@@ -1,4 +1,6 @@
 #include "CorbaTaskContextServer.hpp"
+#include <rtt/remote/TypedTaskContextServerGenerator.hpp>
+#include <rtt/remote/TaskContextServerFactory.hpp>
 
 using namespace RTT::Communication;
 
@@ -14,6 +16,21 @@ CorbaTaskContextServer::CorbaTaskContextServer()
  */
 CorbaTaskContextServer::~CorbaTaskContextServer()
 {
+}
+
+/**
+ * @brief This method sets up the task context server generator for the 
+ * Corba implementation, i.e. it registers this type at the generator.
+ * 
+ * @return void
+ */
+void CorbaTaskContextServer::SetupGenerator()
+{
+  // Create a shared pointer to a typed TCS generator for the corba implementation
+  ITaskContextServerGenerator::shared_ptr pCorbaTCSGenerator( new TypedTaskContextServerGenerator<CorbaTaskContextServer>("CORBA_TCS") );
+  
+  // Register the pointer to this typed generator at the TCS factory
+  TaskContextServerFactory::GetInstance()->RegisterTaskContextServerGenerator("CORBA_TCS", pCorbaTCSGenerator);
 }
 
 /**
